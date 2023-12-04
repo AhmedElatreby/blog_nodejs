@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan")
 
 // express app
 const app = express();
@@ -6,20 +7,11 @@ const app = express();
 // listen for requests
 app.listen(3000);
 
-app.use((req, res, next) => {
-  console.log("New request mad:");
-  console.log("host: ", req.hostname);
-  console.log("path: ", req.path);
-  console.log("methos: ", req.method);
-  next()
-});
+//middleware & static files
+app.use(express.static("public"))
+app.use(morgan("dev"))
 
 
-app.use((req, res, next) => {
-  console.log("Next middleware:");
-
-  next()
-});
 // register view engine
 app.set("view engine", "ejs");
 // app.set('views', 'myviews');
